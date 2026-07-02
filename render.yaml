@@ -1,0 +1,42 @@
+services:
+  - type: web
+    name: chess-backend
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 4000
+      - key: LOG_LEVEL
+        value: info
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false
+      - key: IP_HASH_SALT
+        generateValue: true
+      - key: RATE_LIMIT_ROOM_CREATE_PER_MIN
+        value: 10
+      - key: RATE_LIMIT_JOIN_PER_MIN
+        value: 20
+      - key: RATE_LIMIT_MOVE_PER_SEC
+        value: 5
+      - key: AI_MOVE_TIMEOUT_MS
+        value: 8000
+      - key: ROOM_EXPIRY_HOURS
+        value: 2
+      - key: ROOM_HARD_DELETE_HOURS
+        value: 24
+      - key: RECONNECT_GRACE_SECONDS
+        value: 120
+      - key: CLEANUP_JOB_INTERVAL_MINUTES
+        value: 15
